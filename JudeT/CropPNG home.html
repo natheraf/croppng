@@ -26,9 +26,9 @@
         </div>
     </nav>
     <div class="file-button"> 
-      <form action="/action_page.php">
-        <input type="file" id="myFileButton" name="filename" style="margin-top:100px">
-        <input type="submit" id="mySubmit">
+      <form method="post" action="action_page.php" enctype="multipart/form-data">
+        <input type="file" id="file" name="file[]" multiple style="margin-top:100px">
+        <input type="submit" id="submit">
       </form>
     </div>
 
