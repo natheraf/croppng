@@ -1,0 +1,4 @@
+Change the owner of the repository folder to the user which is running the git command. 
+takeown /f <path to the repository> /r /d y
+
+**run this command AS the user u want to transfer ownership to
