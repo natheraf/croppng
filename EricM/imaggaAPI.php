@@ -1,12 +1,10 @@
 <?php
-// https://stackoverflow.com/a/9998628
-// ini_set('xdebug.var_display_max_depth', '10');
-// ini_set('xdebug.var_display_max_children', '256');
-// ini_set('xdebug.var_display_max_data', '1024');
+ini_set('xdebug.var_display_max_depth', '10');
+ini_set('xdebug.var_display_max_children', '256');
+ini_set('xdebug.var_display_max_data', '1024');
 
-$image_url = 'https://www.tomra.com/-/media/project/tomra/tomra/solutions/food/categories/nuts/nuts-banner-copy.jpg';
 $sizes = array(
-    '200x300',
+    $croppedWidth . 'x' . $croppedHeight
 );
 
 $api_credentials = array(
@@ -16,7 +14,7 @@ $api_credentials = array(
 
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, 'https://api.imagga.com/v2/croppings?image_url=' . urlencode($image_url) . '&resolution=' . implode(',', $sizes));
+curl_setopt($ch, CURLOPT_URL, 'https://api.imagga.com/v2/croppings?image_url=' . urlencode($imageURL) . '&resolution=' . implode(',', $sizes));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 curl_setopt($ch, CURLOPT_HEADER, FALSE);
 curl_setopt($ch, CURLOPT_USERPWD, $api_credentials['key'].':'.$api_credentials['secret']);
@@ -26,8 +24,6 @@ curl_close($ch);
 
 $json_response = json_decode($response);
 // var_dump($json_response);
-echo '<pre>' . print_r($json_response, true) . '</pre>';
-// echo '<pre>' . $json_response->result->croppings[0]->x1 . '</pre>';
 
 $x1 = $json_response->result->croppings[0]->x1;
 $y1 = $json_response->result->croppings[0]->y1;
@@ -39,17 +35,14 @@ $height = $y2 - $y1;
 $target_w = $json_response->result->croppings[0]->target_width;
 $target_h = $json_response->result->croppings[0]->target_height;
 
-// https://stackoverflow.com/questions/10233577/create-image-from-url-any-file-type
-$image = imagecreatefromstring(file_get_contents($image_url));
-
-// echo $x1 . " " . $y1 . " " . $x2 . " " . $y2 . " " . $width . " " . $height . " " . get_resource_type($image);
+$image = imagecreatefromstring(file_get_contents($imageURL));
 
 $imageCropped = imagecrop($image, ['x' => $x1, 'y' => $y1, 'width' => $width, 'height' => $height]);
 
 if ($imageCropped !== FALSE) {
-    // header('Content-Type: image/png');
     imagepng($imageCropped, 'image_cropped.png');
-    header("Location: ./image_cropped.png");
+    echo '<img src="./image_cropped.png" alt="image_cropped.png">';
+    // header("Location: ./image_cropped.png");
     imagedestroy($imageCropped);
 }
 imagedestroy($image);

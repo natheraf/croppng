@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CropPNG</title>
+    </head>
+
+    <body>
+        <header>
+
+        </header>
+
+        <nav>
+            
+        </nav>
+        
+        <main>
+            <div>
+                <h1>CropPNG</h1>
+                <h2>An auto-cropping web app</h2>
+                <form action="./cropPNG.php" method="POST" enctype="multipart/form-data">
+                    <h3>Upload Type:</h3>
+                    <label for="singleUpload">
+                        <input type="radio" id="singleUpload" name="uploadType" value="singleUpload" checked>
+                        <strong>Single Image</strong>
+                    </label>
+
+                    <br><br>
+                    <label>
+                        Image URL:
+                        <input type="text" id="imgURL" name="imgURL" value="https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZG9ufGVufDB8fDB8fA%3D%3D&w=1000&q=80">
+                    </label>
+                    <br>-OR-<br>
+                    <label>
+                        Image Upload:
+                        <input type="file" id="fileUpload" name="fileUpload[]">
+                    </label>
+
+                    <p>----------------------------------</p>
+                    <label for="zipUpload">
+                        <input type="radio" id="zipUpload" name="uploadType" value="zipUpload">
+                        <strong>Zip File</strong>
+                    </label>
+
+                    <br><br>
+                    <label>
+                        Zip File Upload:
+                        <input type="file" id="fileUpload" name="fileUpload[]">
+                    </label>
+                    
+                    <br><br>
+
+                    <h4>Choose your cropped resolution:</h4>
+                    <label>
+                        Width:
+                        <input type="text" id="croppedWidth" name="croppedWidth" value="500">
+                    </label>
+                    <br>
+                    <label>
+                        Height:
+                        <input type="text" id="croppedHeight" name="croppedHeight" value="500">
+                    </label>
+
+                    <h4>Choose your API preference:</h4>
+                    <label for="cloudinaryAPI">
+                        <input type="radio" id="cloudinaryAPI" name="apiType" value="cloudinaryAPI" checked>
+                        Cloudinary
+                    </label>
+
+                    <label for="imaggaAPI">
+                        <input type="radio" id="imaggaAPI" name="apiType" value="imaggaAPI">
+                        Imagga
+                    </label>
+
+                    <br><br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </main>
+
+        <footer>
+
+        </footer>
+    </body>
+
+</html>

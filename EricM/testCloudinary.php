@@ -28,7 +28,6 @@ Configuration::instance('cloudinary://215961418216461:6AOiayvtgYxKvBUsru5R6Hqw1_
 // Use the UploadApi class for uploading assets
 use Cloudinary\Api\Upload\UploadApi;
 
-
 // Use the Resize transformation group and the ImageTag class
 use Cloudinary\Transformation\Resize;
 use Cloudinary\Transformation\Background;
