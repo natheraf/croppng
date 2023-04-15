@@ -41,7 +41,7 @@ $imageCropped = imagecrop($image, ['x' => $x1, 'y' => $y1, 'width' => $width, 'h
 
 if ($imageCropped !== FALSE) {
     imagepng($imageCropped, 'image_cropped.png');
-    echo '<img src="./image_cropped.png" alt="image_cropped.png">';
+    echo '<img src="./image_cropped.png" alt="image_cropped.png" width="' . $croppedWidth . '" height="' . $croppedHeight . '">';
     // header("Location: ./image_cropped.png");
     imagedestroy($imageCropped);
 }
