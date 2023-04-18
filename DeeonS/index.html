@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -25,33 +25,57 @@
         label {
             display: block;
             margin-top: 1rem;
-            background-color: white;
+            background-color:;
             border-radius: 5px;
             display: inline-block;
         }
 
-        inpu {
+        input {
             margin-bottom: 1rem;
         }
     </style>
 
 </head>
 <body>
-    <h1>CropPNG</h1>
-    <form>
+    <main>
         <div>
-            <label for="poster">Choose a picture to upload:</label>
+            <h1>CropPNG</h1>
+            <form action="./cropPNG.php" method="POST" enctype="multipart/form-data">
+                <label for="poster">Choose a picture to upload:</label>
 
-            <input type="file"
-                   name="poster"
-                   accept="image/png,
-                image/jpeg">
+                <input type="file"
+                       name="poster"
+                       accept="image/png,image/jpeg">
+                <h4>Choose your cropped resolution:</h4>
+                <label>
+                    Width:
+                    <input type="text" id="croppedWidth" name="croppedWidth" value="500">
+                </label>
+                <br>
+                <label>
+                    Height:
+                    <input type="text" id="croppedHeight" name="croppedHeight" value="500">
+                </label>
+
+
+                <h4>Choose your API preference:</h4>
+                <label for="cloudinaryAPI">
+                    <input type="radio" id="cloudinaryAPI" name="apiType" value="cloudinaryAPI" checked>
+                    Cloudinary
+                </label>
+
+                <label for="imaggaAPI">
+                    <input type="radio" id="imaggaAPI" name="apiType" value="imaggaAPI">
+                    Imagga
+                </label>
+
+                <br><br>
+
+                <button>Sumbit</button>
+
+            </form>
         </div>
-        <div>
-            <button>Sumbit</button>
-        </div>
-    </form>
-    <script>
-    </script>
+        <script></script>
+    </main>
 </body>
 </html>
