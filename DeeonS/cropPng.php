@@ -12,6 +12,7 @@ if ($croppedWidth == '') {
 if ($croppedHeight == '') {
     $croppedHeight = 500;
 }
+
 if($uploadType == "upload"){
     echo 'Type of upload recieved: Single Image upload';
 
@@ -26,10 +27,13 @@ if($uploadType == "upload"){
         if ($info === FALSE) {
             die("Unable to determine image type of uploaded file");
         }
-         echo 'Image type found! <br>Checking if image is JPEG or PNG...<br>';
-         if (($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
+        echo 'Image type found! <br>Checking if image is JPEG or PNG...<br>';
+
+        if (($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
             die("Not a JPEG/PNG");
-        }else {
+        }
+        echo 'Image successfully valiadated!';
+    }else {
         echo 'Image URL found!<br>';
 
         echo '<h3>Original Image<h3><br>';
@@ -42,7 +46,8 @@ if($uploadType == "upload"){
             include "./imaggaAPI.php";
         }
     }
-}else {
+}
+else {
     echo 'upload type not found';
 }
 ?>
