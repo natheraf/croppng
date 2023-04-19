@@ -1,6 +1,4 @@
 <?php
-
-
 $uploadType = $_POST['upload']; // singleUpload zipUpload
 $apiType = $_POST['apiType']; // cloudinaryAPI imaggaAPI
 $croppedWidth = $_POST['croppedWidth'];
@@ -13,7 +11,7 @@ if ($croppedHeight == '') {
     $croppedHeight = 500;
 }
 
-if($uploadType == "upload"){
+if($uploadType == "poster"){
     echo 'Type of upload recieved: Single Image upload';
 
     if($uploadType == ''){
