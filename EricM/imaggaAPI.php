@@ -14,6 +14,10 @@ $api_credentials = array(
 
 $ch = curl_init();
 
+if ($imageURL == '') {
+    $imageURL = 'https://ericma.net:4900/EricM/' . 'original_img' . $imgType;
+}
+
 curl_setopt($ch, CURLOPT_URL, 'https://api.imagga.com/v2/croppings?image_url=' . urlencode($imageURL) . '&resolution=' . implode(',', $sizes));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -41,9 +45,12 @@ $imageCropped = imagecrop($image, ['x' => $x1, 'y' => $y1, 'width' => $width, 'h
 
 if ($imageCropped !== FALSE) {
     imagepng($imageCropped, 'image_cropped.png');
-    echo '<img src="./image_cropped.png" alt="image_cropped.png" width="' . $croppedWidth . '" height="' . $croppedHeight . '">';
+    // echo '<img src="./image_cropped.png" alt="image_cropped.png" width="' . $croppedWidth . '" height="' . $croppedHeight . '">';
+    echo '<img src="./image_cropped.png" alt="image_cropped.png">';
     // header("Location: ./image_cropped.png");
     imagedestroy($imageCropped);
+} else {
+    echo 'Unable to crop image <br>Error: $imageCropped === FALSE';
 }
 imagedestroy($image);
 ?>
