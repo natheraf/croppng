@@ -12,7 +12,7 @@ if ($croppedHeight == '') {
     $croppedHeight = 500;
 }
 
-if ($uploadType == "singleUpload") {
+if ($uploadType == "poster") {
     echo 'Type of upload recieved: Single Image upload<br>';
 
     $imageURL = $_POST['imgURL'];
