@@ -1,6 +1,6 @@
 <?php
 
-$uploadType = $_POST['uploadType']; // singleUpload zipUpload
+$uploadType = $_POST['poster']; // singleUpload zipUpload
 $apiType = $_POST['apiType']; // cloudinaryAPI imaggaAPI
 $croppedWidth = $_POST['croppedWidth'];
 $croppedHeight = $_POST['croppedHeight'];
