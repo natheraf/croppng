@@ -1,4 +1,5 @@
 <?php
+
 $uploadType = $_POST['uploadType']; // singleUpload zipUpload
 $apiType = $_POST['apiType']; // cloudinaryAPI imaggaAPI
 $croppedWidth = $_POST['croppedWidth'];
@@ -11,17 +12,25 @@ if ($croppedHeight == '') {
     $croppedHeight = 500;
 }
 
-if($uploadType == "poster"){
-    echo 'Type of upload recieved: Single Image upload';
+if ($uploadType == "singleUpload") {
+    echo 'Type of upload recieved: Single Image upload<br>';
 
-    if($uploadType == ''){
-        echo 'No Image found';
-        if ($_FILES['fileUpload']['error'][0] !== UPLOAD_ERR_OK) {
+    $imageURL = $_POST['imgURL'];
+
+    if ($imageURL == '') {
+        
+        // only cloudinaryAPI has a 10MB limit, but we set it for both anyways
+        if ($_FILES['fileUpload']['size'] / 1048576 > 10) {
+            die('Uploaded file too large. Only 10MB or less');
+        }
+
+        echo 'No Image URL found, checking uploaded image...<br>';
+        if ($_FILES['fileUpload']['error'] !== UPLOAD_ERR_OK) {
             die('Error: No file uploaded or upload failed');
         }
         echo 'Uploaded File found! <br>Checking if file is image...<br>';
-
-        $info = getimagesize($_FILES['fileUpload']['tmp_name'][0]);
+        
+        $info = getimagesize($_FILES['fileUpload']['tmp_name']);
         if ($info === FALSE) {
             die("Unable to determine image type of uploaded file");
         }
@@ -30,22 +39,34 @@ if($uploadType == "poster"){
         if (($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
             die("Not a JPEG/PNG");
         }
-        echo 'Image successfully valiadated!';
-    }else {
-        echo 'Image URL found!<br>';
-
-        echo '<h3>Original Image<h3><br>';
-        echo '<img src="' . $uploadType . '" alt="original_image"><br>';
-        echo '<h3>Cropped Image<h3><br>';
-        if ($apiType == "cloudinaryAPI") {
-            include "./cloudinaryAPI.php";
-            echo $imgtag;
-        } else {
-            include "./imaggaAPI.php";
+        $imgType = '.jpg';
+        if ($info[2] === IMAGETYPE_PNG) {
+            $imgType = '.png';
         }
+
+        echo 'Image successfully validated!';
+        move_uploaded_file($_FILES['fileUpload']['tmp_name'], './original_img' . $imgType);
+    } else {
+        echo 'Image URL found!<br>';
     }
-}
-else {
+} else if ($uploadType == "zipUpload") {
+    echo 'Type of upload recieved: Zip file upload<br>';
+} else {
     echo 'upload type not found';
+    die();
+}
+
+echo '<h3>Original Image<h3><br>';
+if ($imageURL == '') {
+    echo '<img src="' . './original_img' . $imgType . '" alt="original_image"><br>';
+} else {
+    echo '<img src="' . $imageURL . '" alt="original_image"><br>';
+}
+echo '<h3>Cropped Image<h3><br>';
+if ($apiType == "cloudinaryAPI") {
+    include "./cloudinaryAPI.php";
+    echo $imgtag;
+} else {
+    include "./imaggaAPI.php";
 }
 ?>
