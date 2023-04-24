@@ -69,14 +69,18 @@
                     <input type="text" id="croppedHeight" name="croppedHeight" value="500">
                 </label>
 
-                <label>
-                    Choose your API preference:
-                    <select name=" API" id="API- select">
-                        <option value="">--Please choose an option--</option>
-                        <option value="cloudinaryAPI">Cloudinary</option>
-                        <option value="imaggaAPI">ImaggaAPI</option>
-                    </select>
+                <label>Choose your API preference:</label>
+                <label for="cloudinaryAPI">
+                    <input type="radio" id="cloudinaryAPI" name="apiType" value="cloudinaryAPI" checked>
+                    Cloudinary
                 </label>
+
+                <label for="imaggaAPI">
+                    <input type="radio" id="imaggaAPI" name="apiType" value="imaggaAPI">
+                    Imagga
+                </label>
+
+                <br><br>
 
                 <button>Sumbit</button>
 
