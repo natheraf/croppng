@@ -23,9 +23,14 @@ $cloudinary = new Cloudinary(
 );
 Configuration::instance('cloudinary://215961418216461:6AOiayvtgYxKvBUsru5R6Hqw1_U@durd8kb5e?secure=true');
 
-$result = $cloudinary->uploadApi()->upload($uploadType, [
-    "folder" => "CropPNG/imgs"
-]);
+if ($imageURL == '') {
+    $result = $cloudinary->uploadApi()
+    ->upload('./original_img' . $imgType);
+} else {
+    $result = $cloudinary->uploadApi()->upload($imageURL, [
+        "folder" => "CropPNG/imgs"
+    ]);
+}
 
 // Create the image tag with the transformed image
 $imgtag = (new ImageTag($result['public_id']))
