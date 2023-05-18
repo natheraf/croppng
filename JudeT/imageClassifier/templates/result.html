@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+</head>
+<body>
+    <h1>Result:</h1>
+    <p>Prediction: {{ result }} </p>
+    <p>Accuracy: {{ accuracy }}</p>
+    <button onclick="redirectToPage()">Predict Another</button>
+
+    <script>
+        function redirectToPage() {
+            window.location.href = "/"; // Replace with the URL of the desired page
+        }
+    </script>
+</body>
+</html>
+ 

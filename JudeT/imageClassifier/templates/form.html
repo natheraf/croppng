@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image submission</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <h1>Upload Image for Prediction</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+      <input type="file" name="image">
+      <input type="submit" value="Upload">
+  </form>
+</body>
+</html>
